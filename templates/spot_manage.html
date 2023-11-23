@@ -1,0 +1,10 @@
+{% include '_base.html' %}
+{% load static %}
+
+<div class="container">
+    <button class="btn btn-outline-primary">Add new</button>
+    <button class="btn btn-outline-primary">Remove</button>
+    <div id='m'>{{map|safe}}</div>
+
+    <script src="{% static 'js/spot_manage.js' %}"></script>
+</div>
