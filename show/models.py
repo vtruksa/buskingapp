@@ -9,3 +9,4 @@ class Spot(models.Model):
     description = models.TextField(null=True)
     allowedSlots = models.CharField(max_length=50, null=False, default='')
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    # Past showz 

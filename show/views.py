@@ -1,11 +1,41 @@
 from django.shortcuts import render
+from django.contrib import messages
 from branca.element import JavascriptLink
+
+from .models import *
 
 import folium, clipboard
 
+alltimes = ['10:00-10:30', '10:30-11:00', '11:00-11:30', '11:30-12:00', '12:00-12:30', '12:30-13:00', '13:00-13:30', '13:30-14:00', '14:00-14:30', '14:30-15:00', '15:00-15:30', '15:30-16:00', '16:00-16:30', '16:30-17:00', '17:00-17:30', '17:30-18:00', '18:00-18:30', '18:30-19:00', '19:00-19:30', '19:30-20:00', '20:00-20:30', '20:30-21:00', '21:00-21:30', '21:30-22:00']
+
+start_location = [50.0755, 14.4378]
+
 # Create your views here.
 def manageSpots(request):
-    m = folium.Map(location=(50.0755, 14.4378))
+    if request.method == 'POST':
+        c = request.POST.get('coordinates')
+        name = request.POST.get('name')
+        desc = request.POST.get('description')
+        times = []
+        for t in alltimes:
+            if request.POST.get(t) is not None: times.append(t)
+
+        try: lan, lon = c.split(',')
+        except: request.messages('error', 'Wrong coordinates')
+
+        slots = ""
+
+        for t in times: slots += str(t) + ';'
+
+        s = Spot.objects.create(
+            lan = lan,
+            lon = lon,
+            name = name,
+            description = desc,
+            allowedSlots = slots
+        )
+        
+    m = folium.Map(location=(start_location[0], start_location[1]), zoom_start=13)
     #m.add_child(folium.ClickForLatLng(format_str='"[" + lat + "," + lng + "]"', alert=False))
     m.add_child(folium.ClickForMarker(popup="<b>Lat:</b> ${lat}<br /><b>Lon:</b> ${lng}<br>"))
     m.add_child(folium.ClickForLatLng(alert=False))
