@@ -2,21 +2,27 @@
 {% load static %}
 
 <div class="container">
-    <button class="btn btn-outline-primary">Add new</button>
-    <button class="btn btn-outline-primary">Remove</button>
     <div id='m' class='iframe'>{{map|safe}}</div>
 
     <form>
         <div class="form-group">
-            <input class="form-control" type="text" id="name" name="name" placeholder="Název lokace">
+            <input class="form-control" type="text" id="coordinates" name="coordinates" placeholder="Souřadnice lokace (vyplní se automaticky po kliknutí na mapu)">
         </div>
-        <label for="times">Vyberte povolené časy hraní: </label>
+        <div class="form-group">
+            <input class="form-control" type="text" id="name" name="name" placeholder="Název lokace" required="true">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" id="description" rows="3" placeholder="Podrobnější popis místa (čísla budov před kterými se může hrát atp.)..."></textarea>
+        </div>
+        <h4>Vyberte povolené časy hraní: </h4>
         {% for t in times %}
             <div class="form-check form-check-inline" id="times">
                 <input class="form-check-input" type="checkbox" id="{{t}}" value="{{t}}">
                 <label class="form-check-label" for="inlineCheckbox1">{{t}}</label>
             </div>
         {% endfor %}
+        <br>
+        <button class="btn btn-primary">Přidat místo</button>
     </form>
 
     <script src="{% static 'js/spot_manage.js' %}"></script>

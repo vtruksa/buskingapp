@@ -1,10 +1,8 @@
 $(document).ready(function() {
     console.log('ready')
 
-    
-    //setup_map_btn()
+    $(window).on('message', function(event) {
+        coordinates = event.originalEvent.data.coordinates;
+        $('#coordinates').val(''+coordinates)
+    })
 })
-
-function add_click() {
-    console.log('click')
-}
