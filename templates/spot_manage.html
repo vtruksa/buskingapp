@@ -4,7 +4,20 @@
 <div class="container">
     <button class="btn btn-outline-primary">Add new</button>
     <button class="btn btn-outline-primary">Remove</button>
-    <div id='m'>{{map|safe}}</div>
+    <div id='m' class='iframe'>{{map|safe}}</div>
+
+    <form>
+        <div class="form-group">
+            <input class="form-control" type="text" id="name" name="name" placeholder="Název lokace">
+        </div>
+        <label for="times">Vyberte povolené časy hraní: </label>
+        {% for t in times %}
+            <div class="form-check form-check-inline" id="times">
+                <input class="form-check-input" type="checkbox" id="{{t}}" value="{{t}}">
+                <label class="form-check-label" for="inlineCheckbox1">{{t}}</label>
+            </div>
+        {% endfor %}
+    </form>
 
     <script src="{% static 'js/spot_manage.js' %}"></script>
 </div>
