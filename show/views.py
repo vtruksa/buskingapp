@@ -26,8 +26,8 @@ def manageSpots(request):
         slots = ""
 
         for t in times: slots += str(t) + ';'
-        
-        if request.POST.get('spot_id') == -1:
+        print(request.POST.get('spot_id'))
+        if int(request.POST.get('spot_id')) == -1:
             s = Spot.objects.create(
                 lan = lan,
                 lon = lon,
@@ -55,7 +55,7 @@ def manageSpots(request):
             tooltip="Zobrazit informace",
             popup=f"""<b>{s.name}</b><br>
             <button class='edit-spot btn btn-outline-primary' id='edit{s.id}' onclick='editSpot(this)'>Upravit</button>
-            <button class='del-spot btn btn-outline-danger' id='delete{s.id}'>Smazat lokaci</button>
+            <button class='del-spot btn btn-outline-danger' id='delete{s.id}' onclick='deleteSpot(this)'>Smazat lokaci</button>
             """,
             icon=folium.Icon(color="blue", icon="music")
         ).add_to(m)

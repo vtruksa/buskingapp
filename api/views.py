@@ -14,3 +14,13 @@ def getSpot(request):
     serializer = SpotSerializer(spot, many=False)
 
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+@api_view(('GET', ))
+def delSpot(request):
+    try:
+        s = Spot.objects.get(id=request.GET.get('id'))
+    except:
+        print("Couldn't find the requested spot")
+        return Response({}, status=status.HTTP_400_BAD_REQUEST)
+    s.delete()
+    return Response({}, status=status.HTTP_200_OK)

@@ -1,6 +1,7 @@
 {% include '_base.html' %}
 {% load static %}
 
+{% block content %}
 <div class="container">
     <div id='m' class='iframe'>{{map|safe}}</div>
 
@@ -29,3 +30,4 @@
 
     <script src="{% static 'js/spot_manage.js' %}"></script>
 </div>
+{% endblock %}

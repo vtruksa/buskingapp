@@ -1,11 +1,10 @@
-spot_id = -1
-
 $(document).ready(function() {
     console.log('ready')
 
     $(window).on('message', function(event) {
         if(event.originalEvent.data.t == 'click') {
             coordinates = event.originalEvent.data.coordinates;
+            $('#spot_id').val(-1)
             $('#coordinates').val(''+coordinates)
         } else if(event.originalEvent.data.t == 'load') {
             data = event.originalEvent.data.data

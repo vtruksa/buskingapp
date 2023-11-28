@@ -23,6 +23,18 @@ function editSpot(button) {
     })
 }
 
+function deleteSpot(button) {
+    id = button.id.replace('delete', '')
+
+    $.ajax({
+        url:'/api/del-spot/',
+        method:'GET',
+        data: {'id':id},
+        success: function() {window.top.location.reload()},
+        error: function(data) {console.log(data)}
+    })
+}
+
 async function pasteClip() {
     try {
         navigator.clipboard.readText().then((coordinates) => {
