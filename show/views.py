@@ -26,19 +26,45 @@ def manageSpots(request):
         slots = ""
 
         for t in times: slots += str(t) + ';'
-
-        s = Spot.objects.create(
-            lan = lan,
-            lon = lon,
-            name = name,
-            description = desc,
-            allowedSlots = slots
-        )
+        
+        if request.POST.get('spot_id') == -1:
+            s = Spot.objects.create(
+                lan = lan,
+                lon = lon,
+                name = name,
+                description = desc,
+                allowedSlots = slots
+            )
+        else:
+            try:
+                s = Spot.objects.get(id = request.POST.get('spot_id'))
+                s.lan = lan
+                s.lon = lon
+                s.name = name
+                s.description = desc
+                s.allowedSlots = slots
+                s.save()
+            except Exception as e: print("Couldn't edit the requested spot: " + str(e))
         
     m = folium.Map(location=(start_location[0], start_location[1]), zoom_start=13)
+
+    for s in Spot.objects.all():
+        print('adding '+ s.name +' at: ' + str(s.lan)+'; '+  str(s.lon))
+        folium.Marker(
+            location=[+s.lan, +s.lon],
+            tooltip="Zobrazit informace",
+            popup=f"""<b>{s.name}</b><br>
+            <button class='edit-spot btn btn-outline-primary' id='edit{s.id}' onclick='editSpot(this)'>Upravit</button>
+            <button class='del-spot btn btn-outline-danger' id='delete{s.id}'>Smazat lokaci</button>
+            """,
+            icon=folium.Icon(color="blue", icon="music")
+        ).add_to(m)
+
     #m.add_child(folium.ClickForLatLng(format_str='"[" + lat + "," + lng + "]"', alert=False))
     m.add_child(folium.ClickForMarker(popup="<b>Lat:</b> ${lat}<br /><b>Lon:</b> ${lng}<br>"))
     m.add_child(folium.ClickForLatLng(alert=False))
+
+    
 
     m.get_root().html.add_child(JavascriptLink('../static/js/spot_manage_iframe.js'))
 

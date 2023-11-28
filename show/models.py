@@ -7,6 +7,6 @@ class Spot(models.Model):
     lon = models.FloatField()
     name = models.CharField(max_length=125, null=False, default='')
     description = models.TextField(null=True)
-    allowedSlots = models.CharField(max_length=50, null=False, default='')
+    allowedSlots = models.CharField(max_length=300, null=False, default='')
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     # Past showz 

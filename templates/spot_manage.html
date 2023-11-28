@@ -6,6 +6,7 @@
 
     <form method="post">
         {% csrf_token %}
+        <input id="spot_id" name="spot_id" hidden value="-1">
         <div class="form-group">
             <input class="form-control" type="text" id="coordinates" name="coordinates" required="true" placeholder="Souřadnice lokace (vyplní se automaticky po kliknutí na mapu)">
         </div>
@@ -13,12 +14,12 @@
             <input class="form-control" type="text" id="name" name="name" placeholder="Název lokace" required="true">
         </div>
         <div class="form-group">
-            <textarea class="form-control" name="description" rows="3" placeholder="Podrobnější popis místa (čísla budov před kterými se může hrát atp.)..."></textarea>
+            <textarea class="form-control" id="description" name="description" rows="3" placeholder="Podrobnější popis místa (čísla budov před kterými se může hrát atp.)..."></textarea>
         </div>
         <h4>Vyberte povolené časy hraní: </h4>
         {% for t in times %}
-            <div class="form-check form-check-inline" id="times">
-                <input class="form-check-input" type="checkbox" name="{{t}}" value="{{t}}">
+            <div class="times form-check form-check-inline" id="times">
+                <input class="form-check-input" type="checkbox" name="{{t}}" id="{{t}}">
                 <label class="form-check-label" for="inlineCheckbox1">{{t}}</label>
             </div>
         {% endfor %}
