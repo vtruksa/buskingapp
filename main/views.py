@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import User
 from django.contrib import messages
 
 from .models import UserProfile
+from .forms import UserProfileForm, UserForm
 
 def homeView(request):
     return render(request, 'home.html')
@@ -38,5 +40,38 @@ def registerView(request):
     if request.user.is_authenticated:
         messages.success(request, 'You already are logged in')
         return redirect('home')
+    if request.method == "POST":
+        try:
+            u = User.objects.create(
+                username=request.POST.get('username').lower(),
+                email=request.POST.get('email'),
+                first_name=request.POST.get('first_name'),
+                last_name=request.POST.get('last_name')
+            )
+            u.set_password(request.POST.get('password'))
+            u.save()
+            # TODO encrypt
+            id_number = request.POST.get('id_number')
+            up = UserProfile.objects.create(
+                user=u,
+                id_number=id_number,
+                gear=request.POST.get('gear'),
+                bio=request.POST.get('bio'),
+                link_ig=request.POST.get('link_ig'),
+                link_fb=request.POST.get('link_fb'),
+                link_x=request.POST.get('link_x'),
+                link_tt=request.POST.get('link_tt')
+            )
 
-    return render(request, 'register.html')
+            login(request, u)
+            return redirect('home')
+        except Exception as e: 
+            print('There was an error during the registration proccess: ' + str(e))
+            messages.error(request, 'There was an error during the registration proccess')
+
+    context = {
+        'f1': UserForm(),
+        'f2': UserProfileForm()
+    }
+
+    return render(request, 'register.html', context)

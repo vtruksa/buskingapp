@@ -11,6 +11,7 @@ urlpatterns = [
     path("manage-spot/", manageSpots, name="manage-spot"),
     path("logout/", logoutView, name="logout"),
     path("login/", loginView, name="login"),
+    path("register/", registerView, name="register"),
 
     path('api/', include('api.urls')),
 ]
