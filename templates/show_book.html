@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="container">
-        <h3>Zarezervuj si nová vysoupení: </h3>
+        <h3>Zarezervuj si nová vysoupení, nebo <a href="{% url 'show-list' %}">zobraz své rezervace</a> </h3>
         <div id='m' class='iframe'>{{map|safe}}</div>
 
         <div id="timetable">
@@ -11,10 +11,10 @@
                 <table class="table table-striped table-hover" id="timetable">
                     {% csrf_token %}
                     <thead>
-                        <th>X</th>
                         <th>Jméno lokace</th>
                         <th>Datum</th>
                         <th>Čas</th>
+                        <th>X</th>
                     </thead>
                     <tbody>
                         

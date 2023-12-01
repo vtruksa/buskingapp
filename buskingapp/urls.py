@@ -14,6 +14,7 @@ urlpatterns = [
     path("register/", registerView, name="register"),
 
     path("booking/", bookView, name="book"),
+    path("show-list/", showView, name="show-list"),
 
     path('api/', include('api.urls')),
 ]

@@ -107,3 +107,22 @@ def bookView(request):
         'map':m._repr_html_(),
     }
     return render(request, 'show_book.html', context)
+
+def showView(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "You have to be logged in to manage your shows")
+
+    if request.method == "POST": 
+        try:
+            show = Show.objects.get(id=request.POST.get('del'))
+            show.artist = None
+            show.save()
+        except:
+            print('error')
+            messages.error(request, "There was an error deleting your booking")
+
+    s = Show.objects.filter(artist=request.user)
+    context = {
+        'shows':s
+    }
+    return render(request, 'show_list.html', context)
