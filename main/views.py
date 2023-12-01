@@ -7,7 +7,8 @@ from .models import UserProfile
 from .forms import UserProfileForm, UserForm
 
 def homeView(request):
-    return render(request, 'home.html')
+    context = {'profile':UserProfile.objects.get(user=request.user)}
+    return render(request, 'home.html', context)
     
 def loginView(request):
     if request.user.is_authenticated:
@@ -75,3 +76,7 @@ def registerView(request):
     }
 
     return render(request, 'register.html', context)
+
+def userEdit(request):
+    context = {}
+    return render(request, 'user_edit.html', context)

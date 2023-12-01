@@ -12,6 +12,7 @@ urlpatterns = [
     path("logout/", logoutView, name="logout"),
     path("login/", loginView, name="login"),
     path("register/", registerView, name="register"),
+    path("user-edit/", userEdit, name="user-edit"),
 
     path("booking/", bookView, name="book"),
     path("show-list/", showView, name="show-list"),

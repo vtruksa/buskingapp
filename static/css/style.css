@@ -4,6 +4,8 @@
 
 .container {
     width: 70%;
+    padding: 20px;
+    line-height: 200%
 }
 
 #timetable {margin: auto; width: 70%;}
