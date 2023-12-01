@@ -5,3 +5,19 @@
 .container {
     width: 70%;
 }
+
+#timetable {margin: auto; width: 70%;}
+
+#timetable table {
+    margin: 20px;
+    grid-template-columns: 100px 1fr 1fr;
+    align-self: center;
+}
+
+.btn-cell {
+    text-align: center;
+}
+
+#book-btn {
+    width: 250px;
+}

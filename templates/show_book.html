@@ -1,0 +1,28 @@
+{% include '_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h3>Zarezervuj si nová vysoupení: </h3>
+        <div id='m' class='iframe'>{{map|safe}}</div>
+
+        <div id="timetable">
+            <form method="post" action="">
+                <table class="table table-striped table-hover" id="timetable">
+                    {% csrf_token %}
+                    <thead>
+                        <th>X</th>
+                        <th>Jméno lokace</th>
+                        <th>Datum</th>
+                        <th>Čas</th>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
+                </table>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'js/show_book.js' %}"></script>
+{% endblock %}

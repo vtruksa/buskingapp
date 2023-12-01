@@ -10,7 +10,6 @@ alltimes = ['10:00-10:30', '10:30-11:00', '11:00-11:30', '11:30-12:00', '12:00-1
 
 start_location = [50.0755, 14.4378]
 
-# Create your views here.
 def manageSpots(request):
     if request.method == 'POST':
         c = request.POST.get('coordinates')
@@ -26,7 +25,6 @@ def manageSpots(request):
         slots = ""
 
         for t in times: slots += str(t) + ';'
-        print(request.POST.get('spot_id'))
         if int(request.POST.get('spot_id')) == -1:
             s = Spot.objects.create(
                 lan = lan,
@@ -60,7 +58,6 @@ def manageSpots(request):
             icon=folium.Icon(color="blue", icon="music")
         ).add_to(m)
 
-    #m.add_child(folium.ClickForLatLng(format_str='"[" + lat + "," + lng + "]"', alert=False))
     m.add_child(folium.ClickForMarker(popup="<b>Lat:</b> ${lat}<br /><b>Lon:</b> ${lng}<br>"))
     m.add_child(folium.ClickForLatLng(alert=False))
 
@@ -79,3 +76,34 @@ def manageSpots(request):
     }
 
     return render(request, 'spot_manage.html', context) 
+
+def bookView(request):
+    if not request.user.is_authenticated:
+        messages.error(request, "You have to be logged in to book a show")
+        return redirect('login')
+
+    if request.method=="POST":
+        show = Show.objects.get(id = request.POST.get('book_show'))
+        show.artist = request.user
+        show.save()
+        print(show)
+        
+
+    m = folium.Map(location=(start_location[0], start_location[1]), zoom_start=13)
+    for s in Spot.objects.all():
+        print('adding '+ s.name +' at: ' + str(s.lan)+'; '+  str(s.lon))
+        marker = folium.Marker(
+            location=[+s.lan, +s.lon],
+            tooltip="Zobrazit informace",
+            popup=f"""<b>{s.name}</b><br><small>{s.description}</small><br><button class='btn btn-primary' onclick='loadShows(this)' id='{s.id}'>Rezervovat</button>""",
+            icon=folium.Icon(color="blue", icon="music")
+        )
+        
+        marker.add_to(m)
+
+    m.get_root().html.add_child(JavascriptLink('../static/js/show_book_iframe.js'))
+
+    context={
+        'map':m._repr_html_(),
+    }
+    return render(request, 'show_book.html', context)

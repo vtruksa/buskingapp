@@ -9,4 +9,21 @@ class Spot(models.Model):
     description = models.TextField(null=True)
     allowedSlots = models.CharField(max_length=300, null=False, default='')
     created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-    # Past showz 
+    shows_future = models.ManyToManyField('Show', related_name='show_f')
+    shows_past = models.ManyToManyField('Show', related_name='show_p')
+
+class Show(models.Model):
+    artist = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    spot = models.ForeignKey(Spot, on_delete=models.CASCADE)
+    date = models.DateField(null=True)
+    time = models.ForeignKey('TimeSlot', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.spot.name) + ' at ' + str(self.date) + ' ' + str(self.time)
+
+class TimeSlot(models.Model):
+    start = models.TimeField()
+    end = models.TimeField()
+
+    def __str__(self):
+        return str(self.start) + ' - ' + str(self.end)
