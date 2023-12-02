@@ -29,10 +29,14 @@ def delSpot(request):
 @api_view(('GET', ))
 def loadShows(request):
     try:
-        id = request.GET.get('id')
-        
-        spot = Spot.objects.get(id=id)
-        shows = Show.objects.filter(spot=spot)
+        if int(request.GET.get('id')) != -1:
+            id = request.GET.get('id')
+            spot = Spot.objects.get(id=id)
+            shows = Show.objects.filter(spot=spot)
+        else:
+            times = request.GET.get('times').split(';')
+            print(times)
+            shows = Show.objects.filter(time__in=times)
         
         serializer = ShowSerializer(shows, many=True, user=request.user)
     except Exception as e:

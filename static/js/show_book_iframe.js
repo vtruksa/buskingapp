@@ -3,7 +3,7 @@ function loadShows(btn) {
     $.ajax({
         url:'/api/load-shows/',
         method:'GET',
-        data:{'id':btn.id},
+        data:{'id':btn.id, 'times':null},
         success: function(data) {
             window.parent.postMessage({'t':'load',data})
         },

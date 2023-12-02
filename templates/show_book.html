@@ -4,7 +4,26 @@
 {% block content %}
     <div class="container">
         <h3>Zarezervuj si nová vysoupení, nebo <a href="{% url 'show-list' %}">zobraz své rezervace</a> </h3>
+        <h5>Vyber preferovanou lokaci na mapě: </h5>
+        <h5>Nebo vyber preferovaný čas: </h5>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="btn-timepick">
+              Vyber čas...
+            </button>
+            <div class="dropdown-menu" id="list-timepick">
+                <form method="get">
+                    {% for t in times %}
+                    <div class="form-check form-check-inline dropdown-item" >
+                        <input type="checkbox" class="form-check-input input-timepick" id="{{ t.id }}" name="input-timepick" value="{{ t.id }}"style="position: relative; left: 15px;">
+                        <label class="form-check-label" for="{{ t.id }}" style="position: relative; left: 15px;">{{ t }}</label>
+                    </div>
+                    {% endfor %}
+                </form>
+            </div>
+        </div><br>
         <div id='m' class='iframe'>{{map|safe}}</div>
+        
 
         <div id="timetable">
             <form method="post" action="">
@@ -22,6 +41,7 @@
                 </table>
             </form>
         </div>
+        
     </div>
 
     <script src="{% static 'js/show_book.js' %}"></script>

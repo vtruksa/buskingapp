@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.models import User
 from branca.element import JavascriptLink
@@ -13,6 +13,10 @@ alltimes = ['10:00-10:30', '10:30-11:00', '11:00-11:30', '11:30-12:00', '12:00-1
 start_location = [50.0755, 14.4378]
 
 def manageSpots(request):
+    if not request.user.is_staff:
+        messages.error(request, "K přístupu na tuto stránku nemáte dostatečná oprávnění")
+        return redirect('home')
+
     if request.method == 'POST':
         c = request.POST.get('coordinates')
         name = request.POST.get('name')
@@ -88,7 +92,6 @@ def bookView(request):
         show = Show.objects.get(id = request.POST.get('book_show'))
         show.artist = request.user
         show.save()
-        print(show)
         
 
     m = folium.Map(location=(start_location[0], start_location[1]), zoom_start=13)
@@ -105,8 +108,11 @@ def bookView(request):
 
     m.get_root().html.add_child(JavascriptLink('../static/js/show_book_iframe.js'))
 
+    times = TimeSlot.objects.all()
+
     context={
         'map':m._repr_html_(),
+        'times':times
     }
     return render(request, 'show_book.html', context)
 
@@ -148,6 +154,9 @@ def showList(request):
     return render(request, 'show_list.html', context)
 
 def feedback(request):
+    if not request.user.is_staff:
+        messages.error(request, "K přístupu na tuto stránku nemáte dostatečná oprávnění")
+        return redirect('home')
     f = Feedback.objects.all()
     f_old = f.filter(seen=True)
     f = f.filter(seen=False)
@@ -158,6 +167,9 @@ def feedback(request):
     return render(request, 'feedback_list.html', context)
 
 def feedbackView(request, pk):
+    if not request.user.is_staff:
+        messages.error(request, "K přístupu na tuto stránku nemáte dostatečná oprávnění")
+        return redirect('home')
     try:
         f = Feedback.objects.get(id=pk)
         f.seen = True
@@ -171,6 +183,9 @@ def feedbackView(request, pk):
     return render(request, 'feedback_view.html', context)
 
 def artistView(request, pk):
+    if not request.user.is_staff:
+        messages.error(request, "K přístupu na tuto stránku nemáte dostatečná oprávnění")
+        return redirect('home')
     try:
         a = User.objects.get(id=pk)
         profile = UserProfile(user=a)
@@ -187,6 +202,9 @@ def artistView(request, pk):
     return render(request, 'artist_view.html', context)
 
 def artistOverview(request):
+    if not request.user.is_staff:
+        messages.error(request, "K přístupu na tuto stránku nemáte dostatečná oprávnění")
+        return redirect('home')
     artists = User.objects.filter(is_staff=False)
     context = {
         'artists':artists
