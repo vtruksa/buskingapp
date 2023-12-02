@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.contrib import messages
+from django.contrib.auth.models import User
 from branca.element import JavascriptLink
 
 from .models import *
+from main.models import UserProfile
 
 import folium, clipboard
 
@@ -167,3 +169,26 @@ def feedbackView(request, pk):
         'f':f
     }
     return render(request, 'feedback_view.html', context)
+
+def artistView(request, pk):
+    try:
+        a = User.objects.get(id=pk)
+        profile = UserProfile(user=a)
+        fb = Feedback.objects.filter(show__artist = a)
+    except:
+        messages.error(request, "We couldn't find the requested user")
+        return redirect('home')
+    print(fb)
+    context = {
+        'artist':a,
+        'profile':profile,
+        'feedback':fb
+    }
+    return render(request, 'artist_view.html', context)
+
+def artistOverview(request):
+    artists = User.objects.filter(is_staff=False)
+    context = {
+        'artists':artists
+    }
+    return render(request, 'artist_overview.html', context)

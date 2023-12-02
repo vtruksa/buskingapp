@@ -26,6 +26,7 @@ class UserProfileForm(forms.ModelForm):
     id_number = forms.CharField(max_length=12, required=True, label="Číslo identifikačního dokladu (op, pas, ř.p.)")
     gear = forms.CharField(widget=forms.Textarea(attrs={'rows': 4}), label='Výbava a nástroje', required=False)
     bio = forms.CharField(widget=forms.Textarea(attrs={'rows': 4}), label='Bio', required=False)
+    art_name = forms.CharField(max_length=128, label="Umělecké jméno", required=False)
     link_ig = forms.CharField(max_length=128, label="Link na Instagram", required=False)
     link_fb = forms.CharField(max_length=128, label="Link na Facebook", required=False)
     link_x = forms.CharField(max_length=128, label="Link na X", required=False)

@@ -1,0 +1,33 @@
+{% include '_base.html' %}
+
+{% block content %}
+<div class="container"> 
+    <div id="artist-card">
+        <h5>Profil uživatele {{artist.username}}</h5>
+        {{artist.first_name}} {{artist.last_name}}<br>
+        <b>Umělecké jméno: </b>{{profile.art_name}}
+        <hr>
+        <p><b>Bio: </b> {{profile.bio}}</p>
+        <p><b>Výbava a nástroje: </b> {{profile.gear}}</p>
+        <p><b>Instagram: </b> {{profile.link_ig}}</p>
+        <p><b>Facebook: </b> {{profile.link_fb}}</p>
+        <p><b>X: </b> {{profile.link_x}}</p>
+        <p><b>TikTok: </b> {{profile.link_tt}}</p>
+    </div><br><br>
+    <table class="table table-striped table-hover" id="feedback-table">
+        <h5>Zpětná odezva na tohoto uživatele</h5>
+        <thead>
+                <th>Čas</th>
+                <th>Email</th>
+                <th></th>
+        </thead>
+        <tbody>
+            {% for feed in feedback %}<tr>
+                <td>{{feed.sent}}</td>
+                <td>{{feed.email}}</td>
+                <td><a href="{% url 'feedback-r' feed.id %}">Otevřít</a></td>
+            </tr>{% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

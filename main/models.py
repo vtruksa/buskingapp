@@ -6,6 +6,7 @@ from show.models import Show
 # Create your models here.
 class UserProfile(models.Model):
     user = models.OneToOneField(to=User, on_delete=models.CASCADE)
+    art_name = models.CharField(max_length=128, null=True)
     gear = models.TextField(null=True)
     bio = models.TextField(null=True)
     link_ig = models.CharField(max_length=128, null=True)

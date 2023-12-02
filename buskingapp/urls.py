@@ -20,6 +20,8 @@ urlpatterns = [
 
     path("feedback/", feedback, name="feedback"),
     path("feedback/<int:pk>", feedbackView, name="feedback-r"),
+    path("artist-overview/", artistOverview, name="artist-overview"),
+    path("artist/<int:pk>", artistView, name="artist"),
 
     path('api/', include('api.urls')),
 ]

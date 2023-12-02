@@ -14,10 +14,13 @@
         {% if request.user.is_authenticated %}
           {% if request.user.is_staff %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'manage-spot'%}">Manage</a>
+              <a class="nav-link" href="{% url 'manage-spot'%}">Správa lokací</a>
             </li>
             <li>
               <a class="nav-link" href="{% url 'feedback' %}">Zpětné vazby</a>
+            </li>
+            <li>
+              <a class="nav-link" href="{% url 'artist-overview' %}">Přehled umělců</a>
             </li>
           {% else %}
             <li class="nav-item">

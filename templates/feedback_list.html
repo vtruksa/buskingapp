@@ -10,13 +10,13 @@
                 <thead>
                         <th>Čas</th>
                         <th>Email</th>
-                        <th>Zpráva</th>
+                        <th></th>
                 </thead>
                 <tbody>
                     {% for feed in f %}<tr>
                         <td>{{feed.sent}}</td>
                         <td>{{feed.email}}</td>
-                        <td><a href="{% url 'feedback-r' feed.id %}">{{feed.body}}</a></td>
+                        <td><a href="{% url 'feedback-r' feed.id %}">Otevřít</a></td>
                     </tr>{% endfor %}
                 </tbody>
             </table>

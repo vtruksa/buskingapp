@@ -37,3 +37,11 @@
 .email input, textarea {
     margin-top: 20px;
 }
+
+#artist-card {
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    padding: 30px;
+    width: 700px;
+    margin: auto;
+}
