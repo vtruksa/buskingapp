@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="{% url 'home' %}">Busking app</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" id="nav-toggler">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -39,8 +39,17 @@
         </li>
         {% endif %}
         <li class="nav-item">
-          <a class="nav-link" href="#">Kontakt</a>
+          <a class="nav-link" href="{% url 'contact' %}">Kontakt</a>
         </li>
       </ul>
     </div>
   </nav>
+
+  <script>
+    $(document).ready(function() {
+      $('#nav-toggler').click(function() {
+        if($('#navbarNav').hasClass('show')) {$('#navbarNav').removeClass('show')}
+        else {$('#navbarNav').addClass('show')}
+      })
+    })
+  </script>

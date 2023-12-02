@@ -8,12 +8,13 @@ urlpatterns = [
     path("admin/", admin.site.urls),
 
     path("", homeView, name="home"),
-    path("manage-spot/", manageSpots, name="manage-spot"),
     path("logout/", logoutView, name="logout"),
     path("login/", loginView, name="login"),
     path("register/", registerView, name="register"),
     path("user-edit/", userEdit, name="user-edit"),
+    path("contact/", contactView, name="contact"),
 
+    path("manage-spot/", manageSpots, name="manage-spot"),
     path("booking/", bookView, name="book"),
     path("my-shows/", showView, name="show-list"),
     path("shows/", showList, name="shows"),

@@ -3,7 +3,9 @@
 {% block content %}
 <div class="container">
     <h3>Welcome to the busking app</h3><br><br>
-    {% if request.user.is_authenticated %}
+    {% if request.user.is_staff %}
+        
+    {% elif request.user.is_authenticated %}
         <div class="row">
             <div class="col">
                 <h4>Jste přihlášeni jako {{request.user}}</h4><hr>

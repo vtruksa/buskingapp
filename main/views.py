@@ -105,3 +105,6 @@ def userEdit(request):
         'form2': form2
     }
     return render(request, 'user_edit.html', context)
+
+def contactView(request):
+    return render(request, 'contact.html')
