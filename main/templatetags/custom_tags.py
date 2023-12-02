@@ -19,12 +19,11 @@ def render_bs5(form):
             group = 'form-check'
             cl = 'form-check-input'
             if f.value(): checked = 'checked'
-
         html += '<div class='+group+'><label>'+str(f.label)+'</label>'
-        if input_type is not 'ta':
-            html += '<input type="' + input_type + '" name="'+ f.name +'" class="'+ cl +'" '+ checked +'>'
+        if input_type != 'ta':
+            html += '<input type="' + input_type + '" name="'+ f.name +'" class="'+ cl +'" '+ checked +' value="'+f.value()+'">'
         else:
-            html += '<textarea rows=4 name="'+f.name+'" class="'+cl+'"></textarea>'
+            html += '<textarea rows=4 name="'+f.name+'" class="'+cl+'">'+f.value()+'</textarea>'
         html += '<br><small class="form-text text-muted">'+f.help_text+'</small>'
         html+= '</div>'
 

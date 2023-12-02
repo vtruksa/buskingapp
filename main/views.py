@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 
 from .models import UserProfile
-from .forms import UserProfileForm, UserForm
+from .forms import UserProfileForm, UserForm, UserEditForm
 
 def homeView(request):
     context = {'profile':UserProfile.objects.get(user=request.user)}
@@ -78,5 +78,28 @@ def registerView(request):
     return render(request, 'register.html', context)
 
 def userEdit(request):
-    context = {}
+    if not request.user.is_authenticated:
+        messages.error(request, 'You have to be logged in to edit your profile')
+        return redirect('login')
+    if request.method == 'POST':
+        form1 = UserEditForm(request.POST, instance=request.user)
+        form2 = UserProfileForm(request.POST, instance=UserProfile.objects.get(user=request.user))
+        
+        if form1.is_valid() and form2.is_valid():
+            form1.save()
+            form2.save()
+        else:
+            print('invalid')
+            for e in form1.errors: 
+                print('error: ' + str(e))
+            for e in form2.errors:
+                print('error: ' + str(e))
+
+    form1 = UserEditForm(instance=request.user)
+
+    form2 = UserProfileForm(instance=UserProfile.objects.get(user=request.user))
+    context = {
+        'form1': form1,
+        'form2': form2
+    }
     return render(request, 'user_edit.html', context)

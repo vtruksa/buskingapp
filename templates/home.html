@@ -14,6 +14,10 @@
             {% else %}<small>Informace o vybavení a nástrojích zatím nemáme k dispozici</small> {% endif %}<br>
             {% if profile.bio != '' %}{{profile.bio}}
             {% else %}<small>Vaše bio zatím nemáme k dispozici</small> {% endif %}<br>
+            {% if profile.link_ig != '' %} <a href="{{profile.link_ig}}">{{profile.link_ig}}</a><br>{% endif %}
+            {% if profile.link_fb != '' %} <a href="{{profile.link_fb}}">{{profile.link_fb}}</a><br>{% endif %}
+            {% if profile.link_x != '' %} <a href="{{profile.link_x}}">{{profile.link_x}}</a><br> {% endif %}
+            {% if profile.link_tt != '' %} <a href="{{profile.link_tt}}">{{profile.link_tt}}</a><br> {% endif %}<br>
             <a class="btn btn-outline-primary" href="{% url 'user-edit' %}">Upravit profil</a>
         </div>
         <div class="col-2">

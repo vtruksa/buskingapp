@@ -1,0 +1,14 @@
+{% include '_base.html' %}
+{% load custom_tags %}
+
+{% block content %}
+    <div class="container">
+        <h3>Edit your profile</h3>
+        <form method="post" action="" id="user-edit-form">
+            {% csrf_token %}
+            {{form1|render_bs5}}
+            {{form2|render_bs5}}
+            <button class="btn btn-outline-primary">Uložit změny</button>
+        </form>
+    </div>
+{% endblock %}

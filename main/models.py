@@ -13,5 +13,10 @@ class UserProfile(models.Model):
     link_x = models.CharField(max_length=128, null=True)
     link_tt = models.CharField(max_length=128, null=True)
     id_number = models.TextField(null=False, default=-1)
-    
     # Warnings
+    
+# Feedback message from citizens
+class Feedback(models.Model):
+    show = models.ForeignKey(Show, on_delete=models.CASCADE)
+    email = models.EmailField()
+    body = models.TextField()
