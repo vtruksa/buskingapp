@@ -33,3 +33,5 @@ class Feedback(models.Model):
     show = models.ForeignKey(Show, on_delete=models.CASCADE)
     email = models.EmailField()
     body = models.TextField()
+    seen = models.BooleanField(default=False)
+    sent = models.DateTimeField(auto_now_add=True)

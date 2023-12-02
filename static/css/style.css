@@ -23,3 +23,17 @@
 #book-btn {
     width: 250px;
 }
+
+.email {
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    padding: 30px;
+    width: 700px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.email input, textarea {
+    margin-top: 20px;
+}

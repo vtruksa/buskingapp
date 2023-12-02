@@ -130,7 +130,6 @@ def showView(request):
 def showList(request):
     if request.method == "POST":
         try:
-            print(request.POST.get('id'))
             m = Feedback.objects.create(
                 show=Show.objects.get(id=request.POST.get('id')),
                 email=request.POST.get('email'),
@@ -145,3 +144,26 @@ def showList(request):
         'shows':shows
     }
     return render(request, 'show_list.html', context)
+
+def feedback(request):
+    f = Feedback.objects.all()
+    f_old = f.filter(seen=True)
+    f = f.filter(seen=False)
+    context = {
+        'f':f,
+        'f_old':f_old,
+    }
+    return render(request, 'feedback_list.html', context)
+
+def feedbackView(request, pk):
+    try:
+        f = Feedback.objects.get(id=pk)
+        f.seen = True
+        f.save()
+    except:
+        messages.error("Couldn't find the requested message")
+        return redirect('feedback')
+    context = {
+        'f':f
+    }
+    return render(request, 'feedback_view.html', context)

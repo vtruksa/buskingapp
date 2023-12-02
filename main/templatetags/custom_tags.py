@@ -20,10 +20,11 @@ def render_bs5(form):
             cl = 'form-check-input'
             if f.value(): checked = 'checked'
         html += '<div class='+group+'><label>'+str(f.label)+'</label>'
+        val = f.value() if f.value() is not None else ""
         if input_type != 'ta':
-            html += '<input type="' + input_type + '" name="'+ f.name +'" class="'+ cl +'" '+ checked +' value="'+f.value()+'">'
+            html += '<input type="' + str(input_type) + '" name="'+ str(f.name) +'" class="'+ cl +'" '+ checked +' value="'+str(val)+'">'
         else:
-            html += '<textarea rows=4 name="'+f.name+'" class="'+cl+'">'+f.value()+'</textarea>'
+            html += '<textarea rows=4 name="'+str(f.name)+'" class="'+cl+'">'+str(val)+'</textarea>'
         html += '<br><small class="form-text text-muted">'+f.help_text+'</small>'
         html+= '</div>'
 

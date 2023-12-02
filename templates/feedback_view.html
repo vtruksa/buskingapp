@@ -1,0 +1,21 @@
+{% include '_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <div class="email">
+            <p>Od: {{f.email}}</p>
+            <small>{{f.sent}}</small><hr>
+            <p>{{f.body}}</p>
+        </div>
+        
+        <div class="email">
+            <h5>Odpovězte na zprávu</h5>
+            <form method="post" action="">
+                <input class="form-control" name="subject" placeholder="Předmět">
+                <textarea class="form-control" name="body" placeholder="Vaše odpověď..." rows="4"></textarea>
+                <input type="button" value="Odeslat" class="btn btn-outline-primary">
+            </form>
+        </div>
+    </div>
+{% endblock %}

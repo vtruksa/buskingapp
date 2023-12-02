@@ -1,0 +1,40 @@
+{% include '_base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+        <h3>Seznam zpráv</h3>
+        <div id="feedback-list">
+            <h5>Nové zprávy</h5>
+            <table class="table table-striped table-hover" id="feedback-table">
+                <thead>
+                        <th>Čas</th>
+                        <th>Email</th>
+                        <th>Zpráva</th>
+                </thead>
+                <tbody>
+                    {% for feed in f %}<tr>
+                        <td>{{feed.sent}}</td>
+                        <td>{{feed.email}}</td>
+                        <td><a href="{% url 'feedback-r' feed.id %}">{{feed.body}}</a></td>
+                    </tr>{% endfor %}
+                </tbody>
+            </table>
+            <h5>Přečtené</h5>
+            <table class="table table-striped table-hover" id="feedback-old-table">
+                <thead>
+                        <th>Čas</th>
+                        <th>Email</th>
+                        <th>Zpráva</th>
+                </thead>
+                <tbody>
+                    {% for feed in f_old %}<tr>
+                        <td>{{feed.sent}}</td>
+                        <td>{{feed.email}}</td>
+                        <td><a href="{% url 'feedback-r' feed.id %}">{{feed.body}}</a></td>
+                    </tr>{% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

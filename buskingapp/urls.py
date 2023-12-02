@@ -18,5 +18,8 @@ urlpatterns = [
     path("my-shows/", showView, name="show-list"),
     path("shows/", showList, name="shows"),
 
+    path("feedback/", feedback, name="feedback"),
+    path("feedback/<int:pk>", feedbackView, name="feedback-r"),
+
     path('api/', include('api.urls')),
 ]
