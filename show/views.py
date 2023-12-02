@@ -125,4 +125,23 @@ def showView(request):
     context = {
         'shows':s
     }
+    return render(request, 'my_shows.html', context)
+
+def showList(request):
+    if request.method == "POST":
+        try:
+            print(request.POST.get('id'))
+            m = Feedback.objects.create(
+                show=Show.objects.get(id=request.POST.get('id')),
+                email=request.POST.get('email'),
+                body=request.POST.get('message')
+            )
+            messages.success(request, message="Vaše zpráva byla úspěšně odeslána")
+        except Exception as e:
+            print('There was an error creating the message: ' + str(e))
+
+    shows = Show.objects.filter(artist__isnull=False)
+    context= {
+        'shows':shows
+    }
     return render(request, 'show_list.html', context)

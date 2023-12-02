@@ -15,7 +15,8 @@ urlpatterns = [
     path("user-edit/", userEdit, name="user-edit"),
 
     path("booking/", bookView, name="book"),
-    path("show-list/", showView, name="show-list"),
+    path("my-shows/", showView, name="show-list"),
+    path("shows/", showList, name="shows"),
 
     path('api/', include('api.urls')),
 ]

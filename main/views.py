@@ -7,7 +7,9 @@ from .models import UserProfile
 from .forms import UserProfileForm, UserForm, UserEditForm
 
 def homeView(request):
-    context = {'profile':UserProfile.objects.get(user=request.user)}
+    profile = None
+    if request.user.is_authenticated: profile=UserProfile.objects.get(user=request.user)
+    context = {'profile':profile}
     return render(request, 'home.html', context)
     
 def loginView(request):

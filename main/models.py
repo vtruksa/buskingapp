@@ -16,7 +16,3 @@ class UserProfile(models.Model):
     # Warnings
     
 # Feedback message from citizens
-class Feedback(models.Model):
-    show = models.ForeignKey(Show, on_delete=models.CASCADE)
-    email = models.EmailField()
-    body = models.TextField()

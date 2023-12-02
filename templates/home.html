@@ -3,28 +3,32 @@
 {% block content %}
 <div class="container">
     <h3>Welcome to the busking app</h3><br><br>
-    <div class="row">
-        <div class="col">
-            <h4>Jste přihlášeni jako {{request.user}}</h4><hr>
-            <h4>Profil: </h4><hr>
-            
-            {{request.user.first_name}} {{request.user.last_name}}<br>
-            {{request.user.email}}<br>
-            {% if profile.gear != '' %}{{profile.gear}}
-            {% else %}<small>Informace o vybavení a nástrojích zatím nemáme k dispozici</small> {% endif %}<br>
-            {% if profile.bio != '' %}{{profile.bio}}
-            {% else %}<small>Vaše bio zatím nemáme k dispozici</small> {% endif %}<br>
-            {% if profile.link_ig != '' %} <a href="{{profile.link_ig}}">{{profile.link_ig}}</a><br>{% endif %}
-            {% if profile.link_fb != '' %} <a href="{{profile.link_fb}}">{{profile.link_fb}}</a><br>{% endif %}
-            {% if profile.link_x != '' %} <a href="{{profile.link_x}}">{{profile.link_x}}</a><br> {% endif %}
-            {% if profile.link_tt != '' %} <a href="{{profile.link_tt}}">{{profile.link_tt}}</a><br> {% endif %}<br>
-            <a class="btn btn-outline-primary" href="{% url 'user-edit' %}">Upravit profil</a>
+    {% if request.user.is_authenticated %}
+        <div class="row">
+            <div class="col">
+                <h4>Jste přihlášeni jako {{request.user}}</h4><hr>
+                <h4>Profil: </h4><hr>
+                
+                {{request.user.first_name}} {{request.user.last_name}}<br>
+                {{request.user.email}}<br>
+                {% if profile.gear != '' %}{{profile.gear}}
+                {% else %}<small>Informace o vybavení a nástrojích zatím nemáme k dispozici</small> {% endif %}<br>
+                {% if profile.bio != '' %}{{profile.bio}}
+                {% else %}<small>Vaše bio zatím nemáme k dispozici</small> {% endif %}<br>
+                {% if profile.link_ig != '' %} <a href="{{profile.link_ig}}">{{profile.link_ig}}</a><br>{% endif %}
+                {% if profile.link_fb != '' %} <a href="{{profile.link_fb}}">{{profile.link_fb}}</a><br>{% endif %}
+                {% if profile.link_x != '' %} <a href="{{profile.link_x}}">{{profile.link_x}}</a><br> {% endif %}
+                {% if profile.link_tt != '' %} <a href="{{profile.link_tt}}">{{profile.link_tt}}</a><br> {% endif %}<br>
+                <a class="btn btn-outline-primary" href="{% url 'user-edit' %}">Upravit profil</a>
+            </div>
+            <div class="col-2">
+                <a href="{% url 'book' %}">Nové rezervace</a><br>
+                <a href="{% url 'show-list' %}">Mé rezervace</a><br>
+                <a href="{% url 'logout' %}">Odhlásit se</a>
+            </div>
         </div>
-        <div class="col-2">
-            <a href="{% url 'book' %}">Nové rezervace</a><br>
-            <a href="{% url 'show-list' %}">Mé rezervace</a><br>
-            <a href="{% url 'logout' %}">Odhlásit se</a>
-        </div>
-    </div>
+    {% else %}
+        
+    {% endif %}
 </div>
 {% endblock %}

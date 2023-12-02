@@ -27,3 +27,9 @@ class TimeSlot(models.Model):
 
     def __str__(self):
         return str(self.start) + ' - ' + str(self.end)
+
+
+class Feedback(models.Model):
+    show = models.ForeignKey(Show, on_delete=models.CASCADE)
+    email = models.EmailField()
+    body = models.TextField()
