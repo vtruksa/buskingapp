@@ -16,4 +16,7 @@ class UserProfile(models.Model):
     id_number = models.TextField(null=False, default=-1)
     # Warnings
     
-# Feedback message from citizens
+    def __str__(self):
+        if art_name is not null and art_name != '':
+            return art_name
+        return user.username

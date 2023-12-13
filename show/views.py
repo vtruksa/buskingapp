@@ -183,17 +183,13 @@ def feedbackView(request, pk):
     return render(request, 'feedback_view.html', context)
 
 def artistView(request, pk):
-    if not request.user.is_staff:
-        messages.error(request, "K přístupu na tuto stránku nemáte dostatečná oprávnění")
-        return redirect('home')
     try:
         a = User.objects.get(id=pk)
-        profile = UserProfile(user=a)
+        profile = UserProfile.objects.get(user=a)
         fb = Feedback.objects.filter(show__artist = a)
     except:
         messages.error(request, "We couldn't find the requested user")
         return redirect('home')
-    print(fb)
     context = {
         'artist':a,
         'profile':profile,

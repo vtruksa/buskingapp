@@ -17,7 +17,7 @@
                     <td>{{show.spot.name}}</td>
                     <td>{{show.date}}</td>
                     <td>{{show.time}}</td>
-                    <td>{{show.artist}}</td>
+                    <td><a href="{% url 'artist' show.artist.id %}">{{show.artist}}</a></td>
                 </tr>{% endfor %}
             </tbody>
         </table>
@@ -35,7 +35,7 @@
                     <td>{{show.spot.name}}</td>
                     <td>{{show.date}}</td>
                     <td>{{show.time}}</td>
-                    <td>{{show.artist}}</td>
+                    <td><a href="{% url 'artist' show.artist.id %}">{{show.artist}}</a></td>
                     <td><button class="feedback btn btn-outline-primary" value="{{show.id}}" data-bs-toggle="modal" data-bs-target="#feedbackModal">Zpětná vazba</button></td>
                 </tr>{% endfor %}
             </tbody>

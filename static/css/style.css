@@ -5,7 +5,7 @@
 .container {
     width: 70%;
     padding: 20px;
-    line-height: 200%
+    line-height: 200%;
 }
 
 #timetable {margin: auto; width: 70%;}
@@ -44,6 +44,18 @@
     padding: 30px;
     width: 700px;
     margin: auto;
+}
+
+#home-menu {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+#home-menu a {
+    margin: 10px;
+    height: 140%;
+    width: 250px;
 }
 
 @media screen and (max-width: 900px) {

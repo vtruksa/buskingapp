@@ -37,7 +37,13 @@
             </div>
         </div>
     {% else %}
-        
+        <div id="home-menu">
+            <ul style="list-style-type: none;">
+                <li><a href="{% url 'login' %}" class="btn btn-outline-primary">Přihlásit se</a></li>
+                <li><a href="{% url 'register' %}" class="btn btn-outline-info">Registrace</a></li>
+                <li><a href="{% url 'show-list' %}" class="btn btn-outline-warning">Seznam vystoupení</a></li>
+            </ul>
+        </div>
     {% endif %}
 </div>
 {% endblock %}
