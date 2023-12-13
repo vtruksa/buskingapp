@@ -6,12 +6,11 @@
         <h3>Zarezervuj si nová vysoupení, nebo <a href="{% url 'show-list' %}">zobraz své rezervace</a> </h3>
         <h5>Vyber preferovanou lokaci na mapě: </h5>
         <h5>Nebo vyber preferovaný čas: </h5>
-
         <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="btn-timepick">
               Vyber čas...
             </button>
-            <div class="dropdown-menu" id="list-timepick">
+            <div class="dropdown-menu" id="list-timepick" style=>
                 <form method="get">
                     {% for t in times %}
                     <div class="form-check form-check-inline dropdown-item" >
@@ -27,7 +26,7 @@
 
         <div id="timetable">
             <form method="post" action="">
-                <table class="table table-striped table-hover" id="timetable">
+                <table class="table table-striped table-hover">
                     {% csrf_token %}
                     <thead>
                         <th>Jméno lokace</th>

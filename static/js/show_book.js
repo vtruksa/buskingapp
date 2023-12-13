@@ -5,7 +5,7 @@ $(window).on('message', function(event) {
     html = ""
     slots.forEach(e => {
         radio = '<input name="book_show" class="form-radio" type="radio" value="'+ e.id +'" id="book'+ e.id +'">'
-        if(e.artist != -1) {radio = 'booked'}
+        if(e.artist != -1) {radio = 'unavailable'}
         console.log(e.artist)
         html += `
             <tr>

@@ -36,6 +36,7 @@ class ShowSerializer(serializers.Serializer):
     def get_spot(self, obj):
         return obj.spot.name
 
+    # Checks the availability for the current artist
     def get_artist(self, obj):
         print('Checking ' + str(obj.spot.name) + ' at ' + str(obj.time) + '; ' + str(obj.date))
         if obj.artist != None: 

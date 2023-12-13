@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
 from show.models import Show, Spot, TimeSlot
 
-def generate():
+def generate(ahead = 1):
     now = datetime.now()
     temp = now
 
-    while temp < now+timedelta(days=3):
+    while temp < now+timedelta(days=ahead):
         times = open('static/times.txt').read().split('\n')
         for t in TimeSlot.objects.all(): 
             for s in Spot.objects.all():

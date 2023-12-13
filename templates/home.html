@@ -4,7 +4,14 @@
 <div class="container">
     <h3>Welcome to the busking app</h3><br><br>
     {% if request.user.is_staff %}
-        
+        <div id="home-menu">
+            <ul style="list-style-type: none;">
+                <li> <a class="btn btn-outline-primary" href="{% url 'shows' %}">Přehled vystoupení</a></li>
+                <li> <a class="btn btn-outline-primary" href="{% url 'manage-spot' %}">Správa lokací</a></li>
+                <li> <a class="btn btn-outline-primary" href="{% url 'feedback' %}">Zpětné vazby od obyvatel</a></li>
+                <li> <a class="btn btn-outline-primary" href="{% url 'artist-overview' %}">Přehled umělců</a></li>
+            </ul>
+        </div>
     {% elif request.user.is_authenticated %}
         <div class="row">
             <div class="col">

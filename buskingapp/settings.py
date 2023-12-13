@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'main',
     'show',
     'bootstrap5',
+    'django_q'
 ]
 
 MIDDLEWARE = [
@@ -117,3 +118,11 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Django_q retry setting
+Q_CLUSTER = {
+   'retry': 30,
+   'timeout':15,
+   'workers': 4,
+   'orm': 'default',
+}
